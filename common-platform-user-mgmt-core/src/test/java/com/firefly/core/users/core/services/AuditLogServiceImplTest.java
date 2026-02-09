@@ -17,8 +17,8 @@
 
 package com.firefly.core.users.core.services;
 
-import com.firefly.common.core.filters.FilterRequest;
-import com.firefly.common.core.queries.PaginationResponse;
+import org.fireflyframework.core.filters.FilterRequest;
+import org.fireflyframework.core.queries.PaginationResponse;
 import com.firefly.core.users.core.mappers.AuditLogMapper;
 import com.firefly.core.users.core.services.impl.AuditLogServiceImpl;
 import com.firefly.core.users.interfaces.dtos.AuditLogDTO;

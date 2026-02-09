@@ -12,9 +12,6 @@
     <artifactId>common-platform-user-mgmt-sdk</artifactId>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <openapi-generator.version>7.0.1</openapi-generator.version>
         <swagger-annotations.version>2.2.15</swagger-annotations.version>
         <jackson.version>2.15.2</jackson.version>
@@ -115,7 +112,7 @@
                             <modelPackage>com.firefly.core.users.sdk.model</modelPackage>
                             <invokerPackage>com.firefly.core.users.sdk.invoker</invokerPackage>
                             <configOptions>
-                                <java20>true</java20>
+                                <java21>true</java21>
                                 <useTags>true</useTags>
                                 <dateLibrary>java8-localdatetime</dateLibrary>
                                 <sourceFolder>src/gen/java/main</sourceFolder>

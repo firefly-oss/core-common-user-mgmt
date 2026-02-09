@@ -17,8 +17,8 @@
 
 package com.firefly.core.users.web.controllers;
 
-import com.firefly.common.core.filters.FilterRequest;
-import com.firefly.common.core.queries.PaginationResponse;
+import org.fireflyframework.core.filters.FilterRequest;
+import org.fireflyframework.core.queries.PaginationResponse;
 import com.firefly.core.users.core.services.RolePermissionService;
 import com.firefly.core.users.interfaces.dtos.RolePermissionDTO;
 import io.swagger.v3.oas.annotations.Operation;

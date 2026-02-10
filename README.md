@@ -283,31 +283,38 @@ http://localhost:8080/swagger-ui.html
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/api/v1/user-roles` | POST | Assign a role to a user |
+| `/api/v1/user-roles` | POST | Create a user-role assignment directly |
 | `/api/v1/user-roles/{userRoleId}` | GET | Get a user-role assignment by ID |
-| `/api/v1/user-roles/{userRoleId}` | DELETE | Remove a role from a user |
+| `/api/v1/user-roles/{userRoleId}` | DELETE | Delete a user-role assignment by ID |
 | `/api/v1/user-roles/filter` | POST | Filter user-role assignments with pagination |
-| `/api/v1/user-roles/user/{userId}` | GET | Get all roles for a user |
+| `/api/v1/users/{userId}/roles` | GET | Get all roles for a user |
+| `/api/v1/users/{userId}/roles` | POST | Assign a role to a user |
+| `/api/v1/users/{userId}/roles/{roleId}` | DELETE | Remove a specific role from a user |
 
 ### Role Permission API
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/api/v1/role-permissions` | POST | Assign a permission to a role |
+| `/api/v1/role-permissions` | POST | Create a role-permission assignment directly |
 | `/api/v1/role-permissions/{rolePermissionId}` | GET | Get a role-permission assignment by ID |
-| `/api/v1/role-permissions/{rolePermissionId}` | DELETE | Remove a permission from a role |
+| `/api/v1/role-permissions/{rolePermissionId}` | DELETE | Delete a role-permission assignment by ID |
 | `/api/v1/role-permissions/filter` | POST | Filter role-permission assignments with pagination |
-| `/api/v1/role-permissions/role/{roleId}` | GET | Get all permissions for a role |
+| `/api/v1/roles/{roleId}/permissions` | GET | Get all permissions for a role |
+| `/api/v1/roles/{roleId}/permissions` | POST | Assign a permission to a role |
+| `/api/v1/roles/{roleId}/permissions/{permissionId}` | DELETE | Remove a specific permission from a role |
 
 ### User External Identity API
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/api/v1/user-external-identities` | POST | Link an external identity to a user |
-| `/api/v1/user-external-identities/{identityId}` | GET | Get an external identity by ID |
-| `/api/v1/user-external-identities/{identityId}` | DELETE | Unlink an external identity from a user |
-| `/api/v1/user-external-identities/filter` | POST | Filter external identities with pagination |
-| `/api/v1/user-external-identities/user/{userId}` | GET | Get all external identities for a user |
+| `/api/v1/external-identities` | POST | Create an external identity |
+| `/api/v1/external-identities/{externalIdentityId}` | GET | Get an external identity by ID |
+| `/api/v1/external-identities/{externalIdentityId}` | PUT | Update an external identity |
+| `/api/v1/external-identities/{externalIdentityId}` | DELETE | Delete an external identity |
+| `/api/v1/external-identities/filter` | POST | Filter external identities with pagination |
+| `/api/v1/users/{userId}/external-identities` | GET | Get all external identities for a user |
+| `/api/v1/users/{userId}/external-identities` | POST | Link an external identity to a user |
+| `/api/v1/users/{userId}/external-identities/{externalIdentityId}` | DELETE | Unlink an external identity from a user |
 
 ### Audit Log API
 
@@ -315,7 +322,7 @@ http://localhost:8080/swagger-ui.html
 |----------|--------|-------------|
 | `/api/v1/audit-logs/{logId}` | GET | Get an audit log entry by ID |
 | `/api/v1/audit-logs/filter` | POST | Filter audit log entries with pagination |
-| `/api/v1/audit-logs/user/{userId}` | GET | Get all audit log entries for a user |
+| `/api/v1/audit-logs/users/{userId}` | GET | Get all audit log entries for a user |
 
 ## Usage Examples
 
@@ -682,7 +689,7 @@ userRoles.forEach(ur -> System.out.println("Role ID: " + ur.getRoleId()));
 **Using REST API (curl):**
 
 ```bash
-curl -X GET http://localhost:8080/api/v1/user-roles/user/123e4567-e89b-12d3-a456-426614174000
+curl -X GET http://localhost:8080/api/v1/users/123e4567-e89b-12d3-a456-426614174000/roles
 ```
 
 #### Removing a Role from a User
@@ -745,7 +752,7 @@ rolePermissions.forEach(rp -> System.out.println("Permission ID: " + rp.getPermi
 **Using REST API (curl):**
 
 ```bash
-curl -X GET http://localhost:8080/api/v1/role-permissions/role/123e4567-e89b-12d3-a456-426614174010
+curl -X GET http://localhost:8080/api/v1/roles/123e4567-e89b-12d3-a456-426614174010/permissions
 ```
 
 #### Removing a Permission from a Role
@@ -788,10 +795,9 @@ System.out.println("Linked external identity with ID: " + linkedIdentity.getId()
 **Using REST API (curl):**
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/user-external-identities \
+curl -X POST http://localhost:8080/api/v1/users/123e4567-e89b-12d3-a456-426614174000/external-identities \
   -H "Content-Type: application/json" \
   -d '{
-    "userAccountId": "123e4567-e89b-12d3-a456-426614174000",
     "provider": "GOOGLE",
     "subjectId": "google-subject-id-123",
     "email": "john.doe@gmail.com",
@@ -814,7 +820,7 @@ externalIdentities.forEach(ei -> System.out.println("Provider: " + ei.getProvide
 **Using REST API (curl):**
 
 ```bash
-curl -X GET http://localhost:8080/api/v1/user-external-identities/user/123e4567-e89b-12d3-a456-426614174000
+curl -X GET http://localhost:8080/api/v1/users/123e4567-e89b-12d3-a456-426614174000/external-identities
 ```
 
 #### Unlinking an External Identity from a User
@@ -831,7 +837,7 @@ System.out.println("Unlinked external identity with ID: " + externalIdentityId);
 **Using REST API (curl):**
 
 ```bash
-curl -X DELETE http://localhost:8080/api/v1/user-external-identities/1
+curl -X DELETE http://localhost:8080/api/v1/external-identities/123e4567-e89b-12d3-a456-426614174050
 ```
 
 ### Audit Log API Examples
@@ -851,7 +857,7 @@ auditLogs.forEach(log -> System.out.println("Action: " + log.getAction() + ", Re
 **Using REST API (curl):**
 
 ```bash
-curl -X GET http://localhost:8080/api/v1/audit-logs/user/123e4567-e89b-12d3-a456-426614174000
+curl -X GET http://localhost:8080/api/v1/audit-logs/users/123e4567-e89b-12d3-a456-426614174000
 ```
 
 #### Filtering Audit Logs

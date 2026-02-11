@@ -5,17 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.firefly</groupId>
-        <artifactId>common-platform-user-mgmt</artifactId>
+        <artifactId>core-common-user-mgmt</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>common-platform-user-mgmt-models</artifactId>
+    <artifactId>core-common-user-mgmt-models</artifactId>
 
     <dependencies>
         <!-- Internal -->
         <dependency>
             <groupId>com.firefly</groupId>
-            <artifactId>common-platform-user-mgmt-interfaces</artifactId>
+            <artifactId>core-common-user-mgmt-interfaces</artifactId>
         </dependency>
 
         <!-- Common Libraries -->

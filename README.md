@@ -38,26 +38,26 @@ The User Management Microservice follows a modular architecture, separating conc
 
 ### Modules
 
-1. **common-platform-user-mgmt-interfaces**
+1. **core-common-user-mgmt-interfaces**
    - Contains DTOs (Data Transfer Objects) and interfaces that define the contract between modules
    - Includes enums and other shared types used across the microservice
 
-2. **common-platform-user-mgmt-models**
+2. **core-common-user-mgmt-models**
    - Contains entity classes that map to database tables
    - Defines the data model and relationships between entities
    - Includes repository interfaces for data access
 
-3. **common-platform-user-mgmt-core**
+3. **core-common-user-mgmt-core**
    - Contains service interfaces and implementations
    - Implements the business logic of the microservice
    - Handles data validation, transformation, and processing
 
-4. **common-platform-user-mgmt-web**
+4. **core-common-user-mgmt-web**
    - Provides RESTful API endpoints for interacting with the microservice
    - Handles HTTP requests and responses
    - Includes Swagger documentation for the API
 
-5. **common-platform-user-mgmt-sdk**
+5. **core-common-user-mgmt-sdk**
    - Provides client libraries for other services to interact with the User Management Microservice
    - Simplifies integration with other components of the Firefly Platform
 
@@ -203,8 +203,8 @@ erDiagram
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-organization/common-platform-user-mgmt.git
-   cd common-platform-user-mgmt
+   git clone https://github.com/your-organization/core-common-user-mgmt.git
+   cd core-common-user-mgmt
    ```
 
 2. Build the project:
@@ -214,7 +214,7 @@ erDiagram
 
 ### Configuration
 
-The application can be configured using the `application.yaml` file located in the `common-platform-user-mgmt-web/src/main/resources` directory.
+The application can be configured using the `application.yaml` file located in the `core-common-user-mgmt-web/src/main/resources` directory.
 
 Key configuration properties include:
 

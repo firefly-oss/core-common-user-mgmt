@@ -1,6 +1,6 @@
 spring:
   application:
-    name: common-platform-user-mgmt
+    name: core-common-user-mgmt
     version: 1.0.0
     description: User Management Core Application
     team:

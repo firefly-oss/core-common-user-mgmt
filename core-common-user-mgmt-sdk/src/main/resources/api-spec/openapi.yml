@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: common-platform-user-mgmt
+  title: core-common-user-mgmt
   description: User Management Core Application
   contact:
     name: Firefly Software Solutions Inc

@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.firefly</groupId>
-        <artifactId>common-platform-user-mgmt</artifactId>
+        <artifactId>core-common-user-mgmt</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>common-platform-user-mgmt-sdk</artifactId>
+    <artifactId>core-common-user-mgmt-sdk</artifactId>
 
     <properties>
         <openapi-generator.version>7.0.1</openapi-generator.version>
@@ -26,7 +26,7 @@
         <!-- Web module for OpenAPI spec -->
         <dependency>
             <groupId>com.firefly</groupId>
-            <artifactId>common-platform-user-mgmt-web</artifactId>
+            <artifactId>core-common-user-mgmt-web</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -98,7 +98,7 @@
                 <version>${openapi-generator.version}</version>
                 <executions>
                     <execution>
-                        <id>common-platform-user-mgmt-sdk</id>
+                        <id>core-common-user-mgmt-sdk</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>

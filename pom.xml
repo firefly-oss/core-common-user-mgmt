@@ -10,16 +10,16 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>common-platform-user-mgmt</artifactId>
+    <artifactId>core-common-user-mgmt</artifactId>
     <groupId>com.firefly</groupId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>common-platform-user-mgmt-interfaces</module>
-        <module>common-platform-user-mgmt-core</module>
-        <module>common-platform-user-mgmt-models</module>
-        <module>common-platform-user-mgmt-web</module>
-        <module>common-platform-user-mgmt-sdk</module>
+        <module>core-common-user-mgmt-interfaces</module>
+        <module>core-common-user-mgmt-core</module>
+        <module>core-common-user-mgmt-models</module>
+        <module>core-common-user-mgmt-web</module>
+        <module>core-common-user-mgmt-sdk</module>
     </modules>
 
     <properties>
@@ -42,27 +42,27 @@
             <!-- Internal modules -->
             <dependency>
                 <groupId>com.firefly</groupId>
-                <artifactId>common-platform-user-mgmt-interfaces</artifactId>
+                <artifactId>core-common-user-mgmt-interfaces</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.firefly</groupId>
-                <artifactId>common-platform-user-mgmt-models</artifactId>
+                <artifactId>core-common-user-mgmt-models</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.firefly</groupId>
-                <artifactId>common-platform-user-mgmt-core</artifactId>
+                <artifactId>core-common-user-mgmt-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.firefly</groupId>
-                <artifactId>common-platform-user-mgmt-web</artifactId>
+                <artifactId>core-common-user-mgmt-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.firefly</groupId>
-                <artifactId>common-platform-user-mgmt-sdk</artifactId>
+                <artifactId>core-common-user-mgmt-sdk</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

@@ -12,7 +12,6 @@
     </parent>
 
     <artifactId>core-common-user-mgmt</artifactId>
-    <groupId>com.firefly</groupId>
     <packaging>pom</packaging>
 
     <modules>
@@ -61,4 +60,3 @@
         </dependencies>
     </dependencyManagement>
 </project>
-

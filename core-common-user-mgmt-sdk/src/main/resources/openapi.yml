@@ -1,0 +1,1905 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:18080
+  description: Generated server url
+tags:
+- name: User External Identities
+  description: API for managing user external identities
+- name: User Roles
+  description: API for managing user roles
+- name: Role Permissions
+  description: API for managing role permissions
+- name: Permissions
+  description: API for managing permissions
+- name: User Accounts
+  description: API for managing user accounts
+- name: Roles
+  description: API for managing roles
+- name: Audit Logs
+  description: API for accessing audit logs
+paths:
+  /api/v1/users/{userId}:
+    get:
+      tags:
+      - User Accounts
+      summary: Get user account by ID
+      description: Returns a user account by its ID
+      operationId: getUserAccountById
+      parameters:
+      - name: userId
+        in: path
+        description: ID of the user account to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved user account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserAccountDTO"
+        "404":
+          description: User account not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserAccountDTO"
+    put:
+      tags:
+      - User Accounts
+      summary: Update an existing user account
+      description: Updates an existing user account and returns the updated user account
+      operationId: updateUserAccount
+      parameters:
+      - name: userId
+        in: path
+        description: ID of the user account to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserAccountDTO"
+        required: true
+      responses:
+        "200":
+          description: User account successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserAccountDTO"
+        "404":
+          description: User account not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserAccountDTO"
+    delete:
+      tags:
+      - User Accounts
+      summary: Delete a user account
+      description: Deletes a user account by its ID
+      operationId: deleteUserAccount
+      parameters:
+      - name: userId
+        in: path
+        description: ID of the user account to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: User account successfully deleted
+        "404":
+          description: User account not found
+  /api/v1/roles/{roleId}:
+    get:
+      tags:
+      - Roles
+      summary: Get role by ID
+      description: Returns a role by its ID
+      operationId: getRoleById
+      parameters:
+      - name: roleId
+        in: path
+        description: ID of the role to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved role
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleDTO"
+        "404":
+          description: Role not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleDTO"
+    put:
+      tags:
+      - Roles
+      summary: Update an existing role
+      description: Updates an existing role and returns the updated role
+      operationId: updateRole
+      parameters:
+      - name: roleId
+        in: path
+        description: ID of the role to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleDTO"
+        required: true
+      responses:
+        "200":
+          description: Role successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleDTO"
+        "404":
+          description: Role not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleDTO"
+    delete:
+      tags:
+      - Roles
+      summary: Delete a role
+      description: Deletes a role by its ID
+      operationId: deleteRole
+      parameters:
+      - name: roleId
+        in: path
+        description: ID of the role to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Role successfully deleted
+        "404":
+          description: Role not found
+  /api/v1/permissions/{permissionId}:
+    get:
+      tags:
+      - Permissions
+      summary: Get permission by ID
+      description: Returns a permission by its ID
+      operationId: getPermissionById
+      parameters:
+      - name: permissionId
+        in: path
+        description: ID of the permission to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved permission
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionDTO"
+        "404":
+          description: Permission not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionDTO"
+    put:
+      tags:
+      - Permissions
+      summary: Update an existing permission
+      description: Updates an existing permission and returns the updated permission
+      operationId: updatePermission
+      parameters:
+      - name: permissionId
+        in: path
+        description: ID of the permission to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PermissionDTO"
+        required: true
+      responses:
+        "200":
+          description: Permission successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionDTO"
+        "404":
+          description: Permission not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionDTO"
+    delete:
+      tags:
+      - Permissions
+      summary: Delete a permission
+      description: Deletes a permission by its ID
+      operationId: deletePermission
+      parameters:
+      - name: permissionId
+        in: path
+        description: ID of the permission to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Permission successfully deleted
+        "404":
+          description: Permission not found
+  /api/v1/external-identities/{externalIdentityId}:
+    get:
+      tags:
+      - User External Identities
+      summary: Get user external identity by ID
+      description: Returns a user external identity by its ID
+      operationId: getUserExternalIdentityById
+      parameters:
+      - name: externalIdentityId
+        in: path
+        description: ID of the user external identity to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved user external identity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserExternalIdentityDTO"
+        "404":
+          description: User external identity not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserExternalIdentityDTO"
+    put:
+      tags:
+      - User External Identities
+      summary: Update an existing user external identity
+      description: Updates an existing user external identity and returns the updated
+        user external identity
+      operationId: updateUserExternalIdentity
+      parameters:
+      - name: externalIdentityId
+        in: path
+        description: ID of the user external identity to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserExternalIdentityDTO"
+        required: true
+      responses:
+        "200":
+          description: User external identity successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserExternalIdentityDTO"
+        "404":
+          description: User external identity not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserExternalIdentityDTO"
+    delete:
+      tags:
+      - User External Identities
+      summary: Delete a user external identity
+      description: Deletes a user external identity by its ID
+      operationId: deleteUserExternalIdentity
+      parameters:
+      - name: externalIdentityId
+        in: path
+        description: ID of the user external identity to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: User external identity successfully deleted
+        "404":
+          description: User external identity not found
+  /api/v1/users/{userId}/roles:
+    get:
+      tags:
+      - User Roles
+      summary: Get roles for a user
+      description: Returns all roles assigned to a specific user
+      operationId: getRolesByUserId
+      parameters:
+      - name: userId
+        in: path
+        description: ID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved user roles
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponse"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponseUserRoleDTO"
+    post:
+      tags:
+      - User Roles
+      summary: Assign role to user
+      description: Assigns a role to a user and returns the created user role
+      operationId: assignRoleToUser
+      parameters:
+      - name: userId
+        in: path
+        description: ID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRoleDTO"
+        required: true
+      responses:
+        "201":
+          description: Role successfully assigned to user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserRoleDTO"
+        "404":
+          description: User or role not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserRoleDTO"
+  /api/v1/users/{userId}/external-identities:
+    get:
+      tags:
+      - User External Identities
+      summary: Get external identities for a user
+      description: Returns all external identities linked to a specific user
+      operationId: getExternalIdentitiesByUserId
+      parameters:
+      - name: userId
+        in: path
+        description: ID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved user external identities
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponse"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponseUserExternalIdentityDTO"
+    post:
+      tags:
+      - User External Identities
+      summary: Link external identity to user
+      description: Links an external identity to a user and returns the created user
+        external identity
+      operationId: linkExternalIdentityToUser
+      parameters:
+      - name: userId
+        in: path
+        description: ID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserExternalIdentityDTO"
+        required: true
+      responses:
+        "201":
+          description: External identity successfully linked to user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserExternalIdentityDTO"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserExternalIdentityDTO"
+  /api/v1/users/filter:
+    post:
+      tags:
+      - User Accounts
+      summary: Get all user accounts with filtering
+      description: Returns a paginated list of user accounts based on filter criteria
+      operationId: filterUserAccounts
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterRequestUserAccountDTO"
+        required: true
+      responses:
+        "200":
+          description: Successfully retrieved user accounts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponse"
+  /api/v1/users:
+    post:
+      tags:
+      - User Accounts
+      summary: Create a new user account
+      description: Creates a new user account and returns the created user account
+      operationId: createUserAccount
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserAccountDTO"
+        required: true
+      responses:
+        "201":
+          description: User account successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserAccountDTO"
+  /api/v1/user-roles/filter:
+    post:
+      tags:
+      - User Roles
+      summary: Get all user roles with filtering
+      description: Returns a paginated list of user roles based on filter criteria
+      operationId: filterUserRoles
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterRequestUserRoleDTO"
+        required: true
+      responses:
+        "200":
+          description: Successfully retrieved user roles
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponse"
+  /api/v1/user-roles:
+    post:
+      tags:
+      - User Roles
+      summary: Create a new user role
+      description: Creates a new user role and returns the created user role
+      operationId: createUserRole
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRoleDTO"
+        required: true
+      responses:
+        "201":
+          description: User role successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserRoleDTO"
+  /api/v1/roles/{roleId}/permissions:
+    get:
+      tags:
+      - Role Permissions
+      summary: Get permissions for a role
+      description: Returns all permissions assigned to a specific role
+      operationId: getPermissionsByRoleId
+      parameters:
+      - name: roleId
+        in: path
+        description: ID of the role
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved role permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RolePermissionDTO"
+        "404":
+          description: Role not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponseRolePermissionDTO"
+    post:
+      tags:
+      - Role Permissions
+      summary: Assign permission to role
+      description: Assigns a permission to a role and returns the created role permission
+      operationId: assignPermissionToRole
+      parameters:
+      - name: roleId
+        in: path
+        description: ID of the role
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RolePermissionDTO"
+        required: true
+      responses:
+        "201":
+          description: Permission successfully assigned to role
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RolePermissionDTO"
+        "404":
+          description: Role or permission not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RolePermissionDTO"
+  /api/v1/roles/filter:
+    post:
+      tags:
+      - Roles
+      summary: Get all roles with filtering
+      description: Returns a paginated list of roles based on filter criteria
+      operationId: filterRoles
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterRequestRoleDTO"
+        required: true
+      responses:
+        "200":
+          description: Successfully retrieved roles
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponse"
+  /api/v1/roles:
+    post:
+      tags:
+      - Roles
+      summary: Create a new role
+      description: Creates a new role and returns the created role
+      operationId: createRole
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleDTO"
+        required: true
+      responses:
+        "201":
+          description: Role successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleDTO"
+  /api/v1/role-permissions/filter:
+    post:
+      tags:
+      - Role Permissions
+      summary: Get all role permissions with filtering
+      description: Returns a paginated list of role permissions based on filter criteria
+      operationId: filterRolePermissions
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterRequestRolePermissionDTO"
+        required: true
+      responses:
+        "200":
+          description: Successfully retrieved role permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponse"
+  /api/v1/role-permissions:
+    post:
+      tags:
+      - Role Permissions
+      summary: Create a new role permission
+      description: Creates a new role permission and returns the created role permission
+      operationId: createRolePermission
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RolePermissionDTO"
+        required: true
+      responses:
+        "201":
+          description: Role permission successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RolePermissionDTO"
+  /api/v1/permissions/filter:
+    post:
+      tags:
+      - Permissions
+      summary: Get all permissions with filtering
+      description: Returns a paginated list of permissions based on filter criteria
+      operationId: filterPermissions
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterRequestPermissionDTO"
+        required: true
+      responses:
+        "200":
+          description: Successfully retrieved permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponse"
+  /api/v1/permissions:
+    post:
+      tags:
+      - Permissions
+      summary: Create a new permission
+      description: Creates a new permission and returns the created permission
+      operationId: createPermission
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PermissionDTO"
+        required: true
+      responses:
+        "201":
+          description: Permission successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionDTO"
+  /api/v1/external-identities/filter:
+    post:
+      tags:
+      - User External Identities
+      summary: Get all user external identities with filtering
+      description: Returns a paginated list of user external identities based on filter
+        criteria
+      operationId: filterUserExternalIdentities
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterRequestUserExternalIdentityDTO"
+        required: true
+      responses:
+        "200":
+          description: Successfully retrieved user external identities
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponse"
+  /api/v1/external-identities:
+    post:
+      tags:
+      - User External Identities
+      summary: Create a new user external identity
+      description: Creates a new user external identity and returns the created user
+        external identity
+      operationId: createUserExternalIdentity
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserExternalIdentityDTO"
+        required: true
+      responses:
+        "201":
+          description: User external identity successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserExternalIdentityDTO"
+  /api/v1/audit-logs/filter:
+    post:
+      tags:
+      - Audit Logs
+      summary: Get all audit logs with filtering
+      description: Returns a paginated list of audit logs based on filter criteria
+      operationId: filterAuditLogs
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilterRequestAuditLogDTO"
+        required: true
+      responses:
+        "200":
+          description: Successfully retrieved audit logs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponse"
+  /api/v1/user-roles/{userRoleId}:
+    get:
+      tags:
+      - User Roles
+      summary: Get user role by ID
+      description: Returns a user role by its ID
+      operationId: getUserRoleById
+      parameters:
+      - name: userRoleId
+        in: path
+        description: ID of the user role to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved user role
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserRoleDTO"
+        "404":
+          description: User role not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserRoleDTO"
+    delete:
+      tags:
+      - User Roles
+      summary: Delete a user role
+      description: Deletes a user role by its ID
+      operationId: deleteUserRole
+      parameters:
+      - name: userRoleId
+        in: path
+        description: ID of the user role to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: User role successfully deleted
+        "404":
+          description: User role not found
+  /api/v1/role-permissions/{rolePermissionId}:
+    get:
+      tags:
+      - Role Permissions
+      summary: Get role permission by ID
+      description: Returns a role permission by its ID
+      operationId: getRolePermissionById
+      parameters:
+      - name: rolePermissionId
+        in: path
+        description: ID of the role permission to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved role permission
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RolePermissionDTO"
+        "404":
+          description: Role permission not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RolePermissionDTO"
+    delete:
+      tags:
+      - Role Permissions
+      summary: Delete a role permission
+      description: Deletes a role permission by its ID
+      operationId: deleteRolePermission
+      parameters:
+      - name: rolePermissionId
+        in: path
+        description: ID of the role permission to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Role permission successfully deleted
+        "404":
+          description: Role permission not found
+  /api/v1/audit-logs/{auditLogId}:
+    get:
+      tags:
+      - Audit Logs
+      summary: Get audit log by ID
+      description: Returns an audit log by its ID
+      operationId: getAuditLogById
+      parameters:
+      - name: auditLogId
+        in: path
+        description: ID of the audit log to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved audit log
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditLogDTO"
+        "404":
+          description: Audit log not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditLogDTO"
+  /api/v1/audit-logs/users/{userId}:
+    get:
+      tags:
+      - Audit Logs
+      summary: Get audit logs for a user
+      description: Returns all audit logs for a specific user
+      operationId: getAuditLogsByUserId
+      parameters:
+      - name: userId
+        in: path
+        description: ID of the user
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved audit logs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponse"
+  /api/v1/audit-logs/resources/{resourceType}/{resourceId}:
+    get:
+      tags:
+      - Audit Logs
+      summary: Get audit logs for a resource
+      description: Returns all audit logs for a specific resource
+      operationId: getAuditLogsByResource
+      parameters:
+      - name: resourceType
+        in: path
+        description: Type of the resource
+        required: true
+        schema:
+          type: string
+      - name: resourceId
+        in: path
+        description: ID of the resource
+        required: true
+        schema:
+          type: string
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully retrieved audit logs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginationResponse"
+  /api/v1/users/{userId}/roles/{roleId}:
+    delete:
+      tags:
+      - User Roles
+      summary: Remove role from user
+      description: Removes a role from a user
+      operationId: removeRoleFromUser
+      parameters:
+      - name: userId
+        in: path
+        description: ID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: roleId
+        in: path
+        description: ID of the role
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Role successfully removed from user
+        "404":
+          description: User role not found
+  /api/v1/users/{userId}/external-identities/{externalIdentityId}:
+    delete:
+      tags:
+      - User External Identities
+      summary: Unlink external identity from user
+      description: Unlinks an external identity from a user
+      operationId: unlinkExternalIdentityFromUser
+      parameters:
+      - name: userId
+        in: path
+        description: ID of the user
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: externalIdentityId
+        in: path
+        description: ID of the external identity
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: External identity successfully unlinked from user
+        "404":
+          description: User external identity not found
+  /api/v1/roles/{roleId}/permissions/{permissionId}:
+    delete:
+      tags:
+      - Role Permissions
+      summary: Remove permission from role
+      description: Removes a permission from a role
+      operationId: removePermissionFromRole
+      parameters:
+      - name: roleId
+        in: path
+        description: ID of the role
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: permissionId
+        in: path
+        description: ID of the permission
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Permission successfully removed from role
+        "404":
+          description: Role permission not found
+components:
+  schemas:
+    UserAccountDTO:
+      required:
+      - email
+      - fullName
+      - isActive
+      - userType
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        fullName:
+          maxLength: 255
+          minLength: 1
+          type: string
+        nickname:
+          maxLength: 100
+          minLength: 0
+          type: string
+        email:
+          maxLength: 255
+          minLength: 0
+          type: string
+          format: email
+        userType:
+          type: string
+          enum:
+          - EMPLOYEE
+          - DISTRIBUTOR
+        branchId:
+          type: string
+          format: uuid
+        distributorId:
+          type: string
+          format: uuid
+        departmentId:
+          type: string
+          format: uuid
+        positionId:
+          type: string
+          format: uuid
+        jobTitle:
+          maxLength: 255
+          minLength: 0
+          type: string
+        avatarUrl:
+          maxLength: 500
+          minLength: 0
+          pattern: "^(https?://)?[\\w\\-]+(\\.[\\w\\-]+)+([\\w\\-\\.,@?^=%&:/~\\+#]*[\\\
+            w\\-\\@?^=%&/~\\+#])?$"
+          type: string
+        themePreference:
+          type: string
+          enum:
+          - LIGHT
+          - DARK
+          - SYSTEM
+        languagePreference:
+          maxLength: 10
+          minLength: 0
+          pattern: "^[a-z]{2}(-[A-Z]{2})?$"
+          type: string
+        locale:
+          maxLength: 10
+          minLength: 0
+          pattern: "^[a-z]{2}_[A-Z]{2}$"
+          type: string
+        timezone:
+          maxLength: 50
+          minLength: 0
+          type: string
+        contactPhone:
+          maxLength: 20
+          minLength: 0
+          pattern: "^\\+?[1-9]\\d{1,14}$"
+          type: string
+        isActive:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+          format: uuid
+        updatedAt:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+          format: uuid
+    RoleDTO:
+      required:
+      - isAssignable
+      - name
+      - scopeType
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          maxLength: 100
+          minLength: 1
+          type: string
+        description:
+          maxLength: 500
+          minLength: 0
+          type: string
+        isAssignable:
+          type: boolean
+        scopeType:
+          type: string
+          enum:
+          - GLOBAL
+          - BRANCH
+          - DISTRIBUTOR
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+          format: uuid
+        updatedAt:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+          format: uuid
+    PermissionDTO:
+      required:
+      - domain
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          maxLength: 100
+          minLength: 1
+          pattern: "^[A-Z_]+$"
+          type: string
+        description:
+          maxLength: 500
+          minLength: 0
+          type: string
+        domain:
+          maxLength: 100
+          minLength: 1
+          pattern: "^[a-z_]+$"
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+          format: uuid
+        updatedAt:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+          format: uuid
+    UserExternalIdentityDTO:
+      required:
+      - isPrimary
+      - provider
+      - subjectId
+      - userAccountId
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        userAccountId:
+          type: string
+          format: uuid
+        provider:
+          maxLength: 100
+          minLength: 1
+          type: string
+        subjectId:
+          maxLength: 255
+          minLength: 1
+          type: string
+        email:
+          maxLength: 255
+          minLength: 0
+          type: string
+          format: email
+        isPrimary:
+          type: boolean
+        linkedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+          format: uuid
+        updatedAt:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+          format: uuid
+    UserRoleDTO:
+      required:
+      - assignedAt
+      - assignedBy
+      - roleId
+      - userAccountId
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        userAccountId:
+          type: string
+          format: uuid
+        roleId:
+          type: string
+          format: uuid
+        branchId:
+          type: string
+          format: uuid
+        distributorId:
+          type: string
+          format: uuid
+        assignedAt:
+          type: string
+          format: date-time
+        assignedBy:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+          format: uuid
+        updatedAt:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+          format: uuid
+    FilterOptions:
+      type: object
+      properties:
+        caseInsensitiveStrings:
+          type: boolean
+        includeInheritedFields:
+          type: boolean
+      description: Filter options for customizing filter behavior
+    FilterRequestUserAccountDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/UserAccountDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    PaginationRequest:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          description: The zero-based page number to retrieve.
+          format: int32
+          example: 0
+          default: 0
+        pageSize:
+          type: integer
+          description: The number of items per page.
+          format: int32
+          example: 10
+          default: 10
+        sortBy:
+          type: string
+          description: The field to sort the results by.
+          example: name
+        sortDirection:
+          type: string
+          description: "The direction of sorting, either ASC or DESC."
+          example: DESC
+          default: DESC
+      description: "Represents a pagination request for retrieving paginated results,\
+        \ including page number, size, sort field, and direction."
+    RangeFilter:
+      type: object
+      properties:
+        ranges:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/RangeObject"
+          description: Map of field names to their range criteria
+      description: Represents range filters for numeric fields
+    RangeObject:
+      type: object
+      properties:
+        from:
+          type: object
+          description: Start value of the range
+        to:
+          type: object
+          description: End value of the range
+      description: Represents a range with from and to values
+    PaginationResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            type: object
+            description: The list of items for the current page.
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: "The current page number, typically zero-based."
+          format: int32
+      description: Represents a paginated response containing a list of items and
+        pagination metadata.
+    FilterRequestUserRoleDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/UserRoleDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    RolePermissionDTO:
+      required:
+      - permissionId
+      - roleId
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        roleId:
+          type: string
+          format: uuid
+        permissionId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+          format: uuid
+        updatedAt:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+          format: uuid
+    FilterRequestRoleDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/RoleDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    FilterRequestRolePermissionDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/RolePermissionDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    FilterRequestPermissionDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/PermissionDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    FilterRequestUserExternalIdentityDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/UserExternalIdentityDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    AuditLogDTO:
+      required:
+      - action
+      - resource
+      - resourceId
+      - timestamp
+      - userAccountId
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        userAccountId:
+          type: string
+          format: uuid
+        action:
+          maxLength: 100
+          minLength: 1
+          type: string
+        resource:
+          maxLength: 100
+          minLength: 1
+          type: string
+        resourceId:
+          maxLength: 255
+          minLength: 1
+          type: string
+        metadata:
+          $ref: "#/components/schemas/JsonNode"
+        ipAddress:
+          maxLength: 45
+          minLength: 0
+          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$"
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+    FilterRequestAuditLogDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/AuditLogDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    JsonNode:
+      type: object
+    PaginationResponseUserRoleDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: "#/components/schemas/UserRoleDTO"
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: "The current page number, typically zero-based."
+          format: int32
+      description: Represents a paginated response containing a list of items and
+        pagination metadata.
+    PaginationResponseUserExternalIdentityDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: "#/components/schemas/UserExternalIdentityDTO"
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: "The current page number, typically zero-based."
+          format: int32
+      description: Represents a paginated response containing a list of items and
+        pagination metadata.
+    PaginationResponseRolePermissionDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: "#/components/schemas/RolePermissionDTO"
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: "The current page number, typically zero-based."
+          format: int32
+      description: Represents a paginated response containing a list of items and
+        pagination metadata.

@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>core-common-user-mgmt-interfaces</artifactId>
+    <name>core-common-user-mgmt-interfaces</name>
 
     <dependencies>
 

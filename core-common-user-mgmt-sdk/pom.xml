@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>core-common-user-mgmt-sdk</artifactId>
+    <name>core-common-user-mgmt-sdk</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>core-common-user-mgmt</artifactId>
+    <name>core-common-user-mgmt</name>
     <packaging>pom</packaging>
 
     <modules>

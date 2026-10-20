@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>core-common-user-mgmt-models</artifactId>
+    <name>core-common-user-mgmt-models</name>
 
     <dependencies>
         <!-- Internal -->

@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.firefly</groupId>
+        <groupId>io.fireflysoftware</groupId>
         <artifactId>core-common-user-mgmt</artifactId>
-        <version>26.10.2</version>
+        <version>26.10.3</version>
     </parent>
 
     <artifactId>core-common-user-mgmt-sdk</artifactId>
@@ -19,7 +19,7 @@
     <dependencies>
         <!-- Web module for OpenAPI spec -->
         <dependency>
-            <groupId>com.firefly</groupId>
+            <groupId>io.fireflysoftware</groupId>
             <artifactId>core-common-user-mgmt-web</artifactId>
             <scope>provided</scope>
         </dependency>
@@ -101,9 +101,9 @@
                             <generatorName>java</generatorName>
                             <library>webclient</library>
                             <output>${generated-sources-dir}</output>
-                            <apiPackage>com.firefly.core.users.sdk.api</apiPackage>
-                            <modelPackage>com.firefly.core.users.sdk.model</modelPackage>
-                            <invokerPackage>com.firefly.core.users.sdk.invoker</invokerPackage>
+                            <apiPackage>io.fireflysoftware.core.users.sdk.api</apiPackage>
+                            <modelPackage>io.fireflysoftware.core.users.sdk.model</modelPackage>
+                            <invokerPackage>io.fireflysoftware.core.users.sdk.invoker</invokerPackage>
                             <configOptions>
                                 <java21>true</java21>
                                 <useTags>true</useTags>

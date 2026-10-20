@@ -251,7 +251,7 @@ server:
 logging:
   level:
     root: INFO
-    com.firefly.core.users: DEBUG
+    io.fireflysoftware.core.users: DEBUG
 ```
 
 ## API Documentation

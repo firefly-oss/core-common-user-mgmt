@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.firefly</groupId>
+        <groupId>io.fireflysoftware</groupId>
         <artifactId>firefly-parent</artifactId>
-        <version>26.10.2</version>
+        <version>26.10.3</version>
         <relativePath/>
     </parent>
 
@@ -33,27 +33,27 @@
         <dependencies>
             <!-- Internal modules -->
             <dependency>
-                <groupId>com.firefly</groupId>
+                <groupId>io.fireflysoftware</groupId>
                 <artifactId>core-common-user-mgmt-interfaces</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.firefly</groupId>
+                <groupId>io.fireflysoftware</groupId>
                 <artifactId>core-common-user-mgmt-models</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.firefly</groupId>
+                <groupId>io.fireflysoftware</groupId>
                 <artifactId>core-common-user-mgmt-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.firefly</groupId>
+                <groupId>io.fireflysoftware</groupId>
                 <artifactId>core-common-user-mgmt-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.firefly</groupId>
+                <groupId>io.fireflysoftware</groupId>
                 <artifactId>core-common-user-mgmt-sdk</artifactId>
                 <version>${project.version}</version>
             </dependency>
